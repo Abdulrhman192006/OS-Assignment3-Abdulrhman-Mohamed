@@ -1,0 +1,181 @@
+╔═══════════════════════════════════════════════════════════════════════════════════════╗
+║           CONCURRENT CPU SCHEDULER SIMULATION (ASSIGNMENT 3 - SYNCHRONIZATION)          ║
+╠═══════════════════════════════════════════════════════════════════════════════════════╣
+║  Processes:       15                                                                  ║
+║  Time Quantum:    2000ms (nominal, simulated 5x faster)                               ║
+║  CPUs:            3                                                                   ║
+║  Student ID:      446052690                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════════════════╝
+
+  ? P1 (Priority: 2) added to ready queue │ Remaining: 4293ms of 4293ms
+  ? P2 (Priority: 8) added to ready queue │ Remaining: 3781ms of 3781ms
+  ? P3 (Priority: 3) added to ready queue │ Remaining: 3995ms of 3995ms
+  ? P4 (Priority: 1) added to ready queue │ Remaining: 1427ms of 1427ms
+  ? P5 (Priority: 1) added to ready queue │ Remaining: 1741ms of 1741ms
+  ? P6 (Priority: 6) added to ready queue │ Remaining: 4415ms of 4415ms
+  ? P7 (Priority: 5) added to ready queue │ Remaining: 3293ms of 3293ms
+  ? P8 (Priority: 4) added to ready queue │ Remaining: 1021ms of 1021ms
+  ? P9 (Priority: 7) added to ready queue │ Remaining: 3936ms of 3936ms
+  ? P10 (Priority: 5) added to ready queue │ Remaining: 2833ms of 2833ms
+  ? P11 (Priority: 9) added to ready queue │ Remaining: 2712ms of 2712ms
+  ? P12 (Priority: 7) added to ready queue │ Remaining: 2613ms of 2613ms
+  ? P13 (Priority: 3) added to ready queue │ Remaining: 2637ms of 2637ms
+  ? P14 (Priority: 5) added to ready queue │ Remaining: 3887ms of 3887ms
+  ? P15 (Priority: 8) added to ready queue │ Remaining: 1342ms of 1342ms
+
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                  ?  3 CPUs STARTING (CONCURRENT SCHEDULER)  ?                    ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+  ┌─ [CPU-1] picks P1 │ Ready queue: [P3 ? P4 ? P5 ? P6 ? P7 ? P8 ? P9 ? P10 ? P11 ? P12 ? P13 ? P14 ? P15]
+  ┌─ [CPU-2] picks P1 │ Ready queue: [P3 ? P4 ? P5 ? P6 ? P7 ? P8 ? P9 ? P10 ? P11 ? P12 ? P13 ? P14 ? P15]
+  ┌─ [CPU-3] picks P1 │ Ready queue: [P3 ? P4 ? P5 ? P6 ? P7 ? P8 ? P9 ? P10 ? P11 ? P12 ? P13 ? P14 ? P15]
+Exception in thread "CPU-2" Exception in thread "CPU-3" java.lang.IllegalThreadStateException
+        at java.base/java.lang.Thread.start(Thread.java:1389)
+        at CpuWorker.run(SchedulerSimulationSync.java:283)
+java.lang.IllegalThreadStateException
+        at java.base/java.lang.Thread.start(Thread.java:1389)
+        at CpuWorker.run(SchedulerSimulationSync.java:283)
+  ? [CPU-3] P1 (Priority: 2) executing quantum [2000ms]
+  ? [CPU-3] P1 completed quantum 2000ms │ Overall progress: [█████████░░░░░░░░░░░] 46%  remaining: 2293ms
+  ? P1 yields CPU for context switch
+  ? P1 (Priority: 2) added to ready queue │ Remaining: 2293ms of 4293ms
+  ┌─ [CPU-1] picks P3 │ Ready queue: [P4 ? P5 ? P6 ? P7 ? P8 ? P9 ? P10 ? P11 ? P12 ? P13 ? P14 ? P15 ? P1]
+  ? [CPU-1] P3 (Priority: 3) executing quantum [2000ms]
+  ? [CPU-1] P3 completed quantum 2000ms │ Overall progress: [██████████░░░░░░░░░░] 50%  remaining: 1995ms
+  ? P3 yields CPU for context switch
+  ? P3 (Priority: 3) added to ready queue │ Remaining: 1995ms of 3995ms
+  ┌─ [CPU-1] picks P4 │ Ready queue: [P5 ? P6 ? P7 ? P8 ? P9 ? P10 ? P11 ? P12 ? P13 ? P14 ? P15 ? P1 ? P3]
+  ? [CPU-1] P4 (Priority: 1) executing quantum [1427ms]
+  ? [CPU-1] P4 completed quantum 1427ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P4 finished execution!
+  ┌─ [CPU-1] picks P5 │ Ready queue: [P6 ? P7 ? P8 ? P9 ? P10 ? P11 ? P12 ? P13 ? P14 ? P15 ? P1 ? P3]
+  ? [CPU-1] P5 (Priority: 1) executing quantum [1741ms]
+  ? [CPU-1] P5 completed quantum 1741ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P5 finished execution!
+  ┌─ [CPU-1] picks P6 │ Ready queue: [P7 ? P8 ? P9 ? P10 ? P11 ? P12 ? P13 ? P14 ? P15 ? P1 ? P3]
+  ? [CPU-1] P6 (Priority: 6) executing quantum [2000ms]
+  ? [CPU-1] P6 completed quantum 2000ms │ Overall progress: [█████████░░░░░░░░░░░] 45%  remaining: 2415ms
+  ? P6 yields CPU for context switch
+  ? P6 (Priority: 6) added to ready queue │ Remaining: 2415ms of 4415ms
+  ┌─ [CPU-1] picks P7 │ Ready queue: [P8 ? P9 ? P10 ? P11 ? P12 ? P13 ? P14 ? P15 ? P1 ? P3 ? P6]
+  ? [CPU-1] P7 (Priority: 5) executing quantum [2000ms]
+  ? [CPU-1] P7 completed quantum 2000ms │ Overall progress: [████████████░░░░░░░░] 60%  remaining: 1293ms
+  ? P7 yields CPU for context switch
+  ? P7 (Priority: 5) added to ready queue │ Remaining: 1293ms of 3293ms
+  ┌─ [CPU-1] picks P8 │ Ready queue: [P9 ? P10 ? P11 ? P12 ? P13 ? P14 ? P15 ? P1 ? P3 ? P6 ? P7]
+  ? [CPU-1] P8 (Priority: 4) executing quantum [1021ms]
+  ? [CPU-1] P8 completed quantum 1021ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P8 finished execution!
+  ┌─ [CPU-1] picks P9 │ Ready queue: [P10 ? P11 ? P12 ? P13 ? P14 ? P15 ? P1 ? P3 ? P6 ? P7]
+  ? [CPU-1] P9 (Priority: 7) executing quantum [2000ms]
+  ? [CPU-1] P9 completed quantum 2000ms │ Overall progress: [██████████░░░░░░░░░░] 50%  remaining: 1936ms
+  ? P9 yields CPU for context switch
+  ? P9 (Priority: 7) added to ready queue │ Remaining: 1936ms of 3936ms
+  ┌─ [CPU-1] picks P10 │ Ready queue: [P11 ? P12 ? P13 ? P14 ? P15 ? P1 ? P3 ? P6 ? P7 ? P9]
+  ? [CPU-1] P10 (Priority: 5) executing quantum [2000ms]
+  ? [CPU-1] P10 completed quantum 2000ms │ Overall progress: [██████████████░░░░░░] 70%  remaining: 833ms
+  ? P10 yields CPU for context switch
+  ? P10 (Priority: 5) added to ready queue │ Remaining: 833ms of 2833ms
+  ┌─ [CPU-1] picks P11 │ Ready queue: [P12 ? P13 ? P14 ? P15 ? P1 ? P3 ? P6 ? P7 ? P9 ? P10]
+  ? [CPU-1] P11 (Priority: 9) executing quantum [2000ms]
+  ? [CPU-1] P11 completed quantum 2000ms │ Overall progress: [██████████████░░░░░░] 73%  remaining: 712ms
+  ? P11 yields CPU for context switch
+  ? P11 (Priority: 9) added to ready queue │ Remaining: 712ms of 2712ms
+  ┌─ [CPU-1] picks P12 │ Ready queue: [P13 ? P14 ? P15 ? P1 ? P3 ? P6 ? P7 ? P9 ? P10 ? P11]
+  ? [CPU-1] P12 (Priority: 7) executing quantum [2000ms]
+  ? [CPU-1] P12 completed quantum 2000ms │ Overall progress: [███████████████░░░░░] 76%  remaining: 613ms
+  ? P12 yields CPU for context switch
+  ? P12 (Priority: 7) added to ready queue │ Remaining: 613ms of 2613ms
+  ┌─ [CPU-1] picks P13 │ Ready queue: [P14 ? P15 ? P1 ? P3 ? P6 ? P7 ? P9 ? P10 ? P11 ? P12]
+  ? [CPU-1] P13 (Priority: 3) executing quantum [2000ms]
+  ? [CPU-1] P13 completed quantum 2000ms │ Overall progress: [███████████████░░░░░] 75%  remaining: 637ms
+  ? P13 yields CPU for context switch
+  ? P13 (Priority: 3) added to ready queue │ Remaining: 637ms of 2637ms
+  ┌─ [CPU-1] picks P14 │ Ready queue: [P15 ? P1 ? P3 ? P6 ? P7 ? P9 ? P10 ? P11 ? P12 ? P13]
+  ? [CPU-1] P14 (Priority: 5) executing quantum [2000ms]
+  ? [CPU-1] P14 completed quantum 2000ms │ Overall progress: [██████████░░░░░░░░░░] 51%  remaining: 1887ms
+  ? P14 yields CPU for context switch
+  ? P14 (Priority: 5) added to ready queue │ Remaining: 1887ms of 3887ms
+  ┌─ [CPU-1] picks P15 │ Ready queue: [P1 ? P3 ? P6 ? P7 ? P9 ? P10 ? P11 ? P12 ? P13 ? P14]
+  ? [CPU-1] P15 (Priority: 8) executing quantum [1342ms]
+  ? [CPU-1] P15 completed quantum 1342ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P15 finished execution!
+  ┌─ [CPU-1] picks P1 │ Ready queue: [P3 ? P6 ? P7 ? P9 ? P10 ? P11 ? P12 ? P13 ? P14]
+  ? [CPU-1] P1 (Priority: 2) executing quantum [2000ms]
+  ? [CPU-1] P1 completed quantum 2000ms │ Overall progress: [██████████████████░░] 93%  remaining: 293ms
+  ? P1 yields CPU for context switch
+  ? P1 (Priority: 2) added to ready queue │ Remaining: 293ms of 4293ms
+  ┌─ [CPU-1] picks P3 │ Ready queue: [P6 ? P7 ? P9 ? P10 ? P11 ? P12 ? P13 ? P14 ? P1]
+  ? [CPU-1] P3 (Priority: 3) executing quantum [1995ms]
+  ? [CPU-1] P3 completed quantum 1995ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P3 finished execution!
+  ┌─ [CPU-1] picks P6 │ Ready queue: [P7 ? P9 ? P10 ? P11 ? P12 ? P13 ? P14 ? P1]
+  ? [CPU-1] P6 (Priority: 6) executing quantum [2000ms]
+  ? [CPU-1] P6 completed quantum 2000ms │ Overall progress: [██████████████████░░] 90%  remaining: 415ms
+  ? P6 yields CPU for context switch
+  ? P6 (Priority: 6) added to ready queue │ Remaining: 415ms of 4415ms
+  ┌─ [CPU-1] picks P7 │ Ready queue: [P9 ? P10 ? P11 ? P12 ? P13 ? P14 ? P1 ? P6]
+  ? [CPU-1] P7 (Priority: 5) executing quantum [1293ms]
+  ? [CPU-1] P7 completed quantum 1293ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P7 finished execution!
+  ┌─ [CPU-1] picks P9 │ Ready queue: [P10 ? P11 ? P12 ? P13 ? P14 ? P1 ? P6]
+  ? [CPU-1] P9 (Priority: 7) executing quantum [1936ms]
+  ? [CPU-1] P9 completed quantum 1936ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P9 finished execution!
+  ┌─ [CPU-1] picks P10 │ Ready queue: [P11 ? P12 ? P13 ? P14 ? P1 ? P6]
+  ? [CPU-1] P10 (Priority: 5) executing quantum [833ms]
+  ? [CPU-1] P10 completed quantum 833ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P10 finished execution!
+  ┌─ [CPU-1] picks P11 │ Ready queue: [P12 ? P13 ? P14 ? P1 ? P6]
+  ? [CPU-1] P11 (Priority: 9) executing quantum [712ms]
+  ? [CPU-1] P11 completed quantum 712ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P11 finished execution!
+  ┌─ [CPU-1] picks P12 │ Ready queue: [P13 ? P14 ? P1 ? P6]
+  ? [CPU-1] P12 (Priority: 7) executing quantum [613ms]
+  ? [CPU-1] P12 completed quantum 613ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P12 finished execution!
+  ┌─ [CPU-1] picks P13 │ Ready queue: [P14 ? P1 ? P6]
+  ? [CPU-1] P13 (Priority: 3) executing quantum [637ms]
+  ? [CPU-1] P13 completed quantum 637ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P13 finished execution!
+  ┌─ [CPU-1] picks P14 │ Ready queue: [P1 ? P6]
+  ? [CPU-1] P14 (Priority: 5) executing quantum [1887ms]
+  ? [CPU-1] P14 completed quantum 1887ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P14 finished execution!
+  ┌─ [CPU-1] picks P1 │ Ready queue: [P6]
+  ? [CPU-1] P1 (Priority: 2) executing quantum [293ms]
+  ? [CPU-1] P1 completed quantum 293ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P1 finished execution!
+  ┌─ [CPU-1] picks P6 │ Ready queue: [empty]
+  ? [CPU-1] P6 (Priority: 6) executing quantum [415ms]
+  ? [CPU-1] P6 completed quantum 415ms │ Overall progress: [████████████████████] 100%  remaining: 0ms
+  ? P6 finished execution!
+
+? WATCHDOG: the simulation did not finish (23 s). A process was lost, or a CPU is blocked forever, or the'completed' counter lost an update.
+
+═══ VERIFICATION (expected values are computed from YOUR seed) ═══
+  Context switches (quanta executed)     expected ??       observed ??       ? MISMATCH
+  Completed processes                    expected ??       observed ??       ? MISMATCH
+  Total service time (ms)                expected ?????    observed ?????    ? MISMATCH
+  Busy-waiting polls (must be 0)         expected ?        observed ???      ? MISMATCH
+  ? At least one check failed (see the ? lines above): a race condition or busy waiting is still present.
+
+═══ Process Summary Table (nominal ms) ═══
+Process   Priority  Burst       Waiting       Turnaround   
+──────────────────────────────────────────────────────────
+P1        ?         ????        ?????         ?????        
+P2        ?         ????        ?             ?            
+P3        ?         ????        ?????         ?????        
+P4        ?         ????        ????          ????         
+P5        ?         ????        ????          ????         
+P6        ?         ????        ?????         ?????        
+P7        ?         ????        ?????         ?????        
+P8        ?         ????        ?????         ?????        
+P9        ?         ????        ?????         ?????        
+P10       ?         ????        ?????         ?????        
+P11       ?         ????        ?????         ?????        
+P12       ?         ????        ?????         ?????        
+P13       ?         ????        ?????         ?????        
+P14       ?         ????        ?????         ?????        
+P15       ?         ????        ?????         ?????        
